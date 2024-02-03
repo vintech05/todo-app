@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&display=swap');
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter Tight', sans-serif;
+
+}
+
+:root {
+
+  /* light mode */
+  --bg-primary: #f5f8ed;
+  --bg-secondary: #fcfdfa;
+  --primary-clr: #a8ce33;
+  --primary-clr-hvr: #9fc332;
+  --secondary-clr: #d3ec85;
+  --accent-clr: #c7ef4d;
+  --text-clr: #101308;
+  --ease-in: all ease-in 200ms;
+
+}
+
+.dark-theme {
+
+  --bg-primary: #030401;
+  --primary-clr: #a6cd32;
+  --bg-secondary: #1d1f18;
+  --accent-clr: #8ab210;
+  --text-clr: #f5f7ed;
+
+}
+
+body {
+
+  display: grid;
+  place-items: center;
+  
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  transition: var(--ease-in);
+  
+}
+
+.wrapper {
+
+  background-color: var(--bg-secondary);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  padding-block: 2em;
+  border: 2px solid var(--accent-clr);
+  border-radius: 20px;
+  padding-inline: 3em;
+  transition: var(--ease-in);
+
+}
+
+.headline {
+
+  text-align: center;
+  padding-block: 2em;
+
+}
+
+span:first-child {
+
+  text-transform: uppercase;
+  font-size: 2em;
+  font-weight: 600;
+  color: var(--primary-clr);
+
+}
+
+span:last-child {
+
+  font-weight: 800;
+  color: var(--text-clr);
+
+}
+
+.todo-input {
+  
+  border: 1px solid var(--accent-clr);
+  border-radius: 50px;
+  padding-left: 1em;
+  display: flex;
+  align-items: center;
+  
+  button {
+
+    border: 0;
+    outline: 0;
+    background-color: var(--accent-clr);
+    color: var(--bg-primary);
+    padding-block: 1em;
+    padding-inline: 2.5em;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 200ms ease-in;
+    
+  }
+  
+}
+
+button:hover {
+  background-color: var(--primary-clr-hvr);
+}
+
+.list-container {
+
+  padding-block: 1em;
+  color: var(--text-clr);
+  position: relative;
+  
+}
+
+input[type=text] {
+
+  border: none;
+  outline: none;
+  background-color: var(--bg-secondary);
+  caret-color: var(--accent-clr);
+  width: 15em;
+  padding-right: 1em;
+  color: var(--text-clr);
+  transition: var(--ease-in);
+  
+}
+
+li {
+
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-wrap: wrap;
+
+}
+
+li::before {
+
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--accent-clr);
+  margin-right: 1em;
+  border-radius: 50px;
+
+}
+
+li span {
+
+  width: 40px;
+  height: 40px;
+  scale: 0.6;
+  color: var(--text-clr);
+  text-align: center;
+  transition: var(--ease-in);
+
+}
+
+li span:hover {
+
+  background-color: rgba(125, 123, 123, 0.2);
+  border-radius: 50px;
+  
+}
+
+.error-msg {
+
+  text-align: center;
+  font-size: 13px;
+  padding-top: 1em;
+  display: none;
+
+}
+
+.clr-btn-wrapper {
+
+  display: grid;
+  place-items: center;
+  padding-top: 2em;
+
+}
+
+.clr-btn {
+
+  border: none;
+  outline: none;
+  background-color: var(--primary-clr);
+  padding-block: .85em;
+  padding-inline: 8.5em;
+  color: var(--bg-primary);
+  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: none;
+
+}
+
+/* The switch - the box around the slider */
+.switch {
+  font-size: 17px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  background-color: var(--bg-secondary);
+  border-radius: 50px;
+  margin: 2em;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  border: 2px solid var(--accent-clr);
+  border-radius: 50px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  left: 0.2em;
+  bottom: 0.2em;
+  background-color: var(--primary-clr);
+  border-radius: inherit;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.switch input:checked + .slider {
+  border: 2px solid var(--accent-clr);
+  background-color: var(--bg-secondary);
+}
+
+.switch input:checked + .slider:before {
+  background-color: var(--primary-clr);
+  transform: translateX(1.5em);
+}
