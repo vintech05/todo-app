@@ -1,6 +1,7 @@
 const input = document.querySelector('input[name=text]');
 const toggleTheme = document.querySelector('input[type=checkbox]');
 const listContainer = document.querySelector('.list-container');
+const placeholder = document.querySelector('.text-display');
 const addValue = document.querySelector('.add-btn')
 const clearValue = document.querySelector('.clr-btn')
 const errorMsg = document.querySelector('.error-msg')
@@ -14,6 +15,8 @@ function addTodo (e) {
         errorMsg.style.color = "red";
         errorMsg.innerText = "Please enter a value";
 
+        placeholder.style.display = "block";
+
         e.preventDefault()
 
     } else if (input.value.length > 30) {
@@ -21,6 +24,8 @@ function addTodo (e) {
       errorMsg.style.display = "block";
       errorMsg.style.color = "red";
       errorMsg.innerText = "Please enter a value less than 30 characters";
+
+      placeholder.style.display = "block";
 
       e.preventDefault()
 
@@ -42,6 +47,7 @@ function addTodo (e) {
 
       input.value = "";
       errorMsg.style.display = "none";
+      placeholder.style.display = "none";
       saveTasks();
 
     }
@@ -55,6 +61,7 @@ function addTodo (e) {
     listContainer.innerHTML = "";
     input.value = "";
     clearValue.style.display = "none";
+    placeholder.style.display = "block";
 
   }
 
@@ -75,13 +82,14 @@ function addTodo (e) {
 
   listContainer.addEventListener('click', (e) => {
 
-    if (e.target.tagName === "SPAN") {
+    if (e.target.tagName === "SPAN" || listContainer.innerHTML === "" ) {
 
       e.target.parentElement.remove();
       clearValue.style.display = "none";
       saveTasks();
-    }
 
+      }
+      return;
   })
 
   function saveTasks () {
@@ -96,8 +104,13 @@ function addTodo (e) {
 
     listContainer.innerHTML = localStorage.getItem('tasks');
     document.body.classList = localStorage.getItem('theme');
-    
 
+    if (listContainer.innerHTML !== "") {
+
+      placeholder.style.display = "none";
+      saveTasks();
+    }
+    return;
   }
 
   loadTasks();
