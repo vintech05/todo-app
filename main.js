@@ -68,7 +68,8 @@ function addTodo (e) {
   toggleTheme.addEventListener('click', () => {
 
     document.body.classList.toggle('dark-theme');
-    localStorage.setItem('theme', document.body.classList);
+
+    saveTasks();
 
   });
 
@@ -86,12 +87,15 @@ function addTodo (e) {
   function saveTasks () {
 
     localStorage.setItem('tasks', listContainer.innerHTML); 
+    localStorage.setItem('theme', document.body.classList);
+
 
   }
 
   function loadTasks () {
 
     listContainer.innerHTML = localStorage.getItem('tasks');
+    document.body.classList = localStorage.getItem('theme');
     
 
   }
