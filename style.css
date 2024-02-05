@@ -156,12 +156,6 @@ li::before {
 
 }
 
-li::before.checked {
-
-  background-color: var(--accent-clr);
-
-}
-
 li span {
 
   width: 40px;
@@ -196,6 +190,17 @@ li span:hover {
   font-size: 13px;
   padding-top: 1em;
   display: none;
+
+}
+
+.text-display {
+
+  text-align: center;
+  font-size: 13px;
+  font-weight: bolder;
+  color: rgba(85, 85, 85, 0.175);
+  font-size: 1.2em;
+  /* display: none; */
 
 }
 
