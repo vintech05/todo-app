@@ -5,7 +5,6 @@ const addValue = document.querySelector('.add-btn')
 const clearValue = document.querySelector('.clr-btn')
 const errorMsg = document.querySelector('.error-msg')
 
-loadTasks();
 
 function addTodo (e) {
 
@@ -32,9 +31,9 @@ function addTodo (e) {
 
       let newItem = document.createElement("li");
       newItem.innerText = input.value;
+      newItem.addEventListener('click', taskCompleted);
 
       listContainer.appendChild(newItem);
-      newItem.addEventListener('click', taskCompleted); 
       
       let span = document.createElement("span");
       span.innerHTML = "&times;";
@@ -43,10 +42,10 @@ function addTodo (e) {
 
       input.value = "";
       errorMsg.style.display = "none";
+      saveTasks();
 
     }
 
-    saveTasks();
     
   }
 
@@ -56,14 +55,12 @@ function addTodo (e) {
     listContainer.innerHTML = "";
     input.value = "";
     clearValue.style.display = "none";
-    localStorage.removeItem('tasks');
 
   }
 
-  function taskCompleted (e) {
+  function taskCompleted () {
 
-    this.style.textDecoration = "line-through";
-    this.style.color = "#555";
+    this.classList.toggle('checked');
     saveTasks();
 
   }
@@ -71,7 +68,7 @@ function addTodo (e) {
   toggleTheme.addEventListener('click', () => {
 
     document.body.classList.toggle('dark-theme');
-    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+    localStorage.setItem('theme', document.body.classList);
 
   });
 
@@ -81,42 +78,25 @@ function addTodo (e) {
 
       e.target.parentElement.remove();
       clearValue.style.display = "none";
-      
+      saveTasks();
     }
 
   })
 
-  // Function to save tasks to localStorage
-function saveTasks() {
+  function saveTasks () {
 
-  const tasks = Array.from(listContainer.children).map(item => item.innerText);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-  
-}
+    localStorage.setItem('tasks', listContainer.innerHTML); 
 
-// Function to load tasks from localStorage
-function loadTasks() {
+  }
 
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasks.forEach(task => {
+  function loadTasks () {
 
-      let newItem = document.createElement("li");
-      newItem.innerText = task;
-      listContainer.appendChild(newItem);
-      newItem.addEventListener('dblclick', taskCompleted);
+    listContainer.innerHTML = localStorage.getItem('tasks');
+    
 
-      // Add the close button and its event listener
-      let span = document.createElement("span");
-      span.innerHTML = "&times;";
-      span.addEventListener('click', (e) => {
-        e.stopPropagation();
-        e.target.parentNode.remove();
-        saveTasks(); // Save tasks after removal
-      });
-      newItem.appendChild(span);
-  });
-}
+  }
 
-document.body.classList.add(localStorage.getItem('theme') || 'light');
+  loadTasks();
+
 addValue.addEventListener('click', addTodo);
 clearValue.addEventListener('click', clearList);
