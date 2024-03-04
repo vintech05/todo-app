@@ -124,6 +124,11 @@ function addTodo (e) {
       }
   });
 
+  optionTab.forEach(option => {
+    option.addEventListener('click', () => setActive(option));
+  });
+
+
 }
 
 
