@@ -16,6 +16,7 @@
   --primary-clr: #a8ce33;
   --input-clr: rgba(186, 182, 182, 0.2);
   --inner-input-clr: rgba(186, 182, 182, 0.008);
+  --indicator-text: rgba(85, 85, 85, 0.9);
   --primary-clr-hvr: #9fc332;
   --secondary-clr: #d3ec85;
   --accent-clr: #c7ef4d;
@@ -38,9 +39,10 @@
 
 body {
 
-  display: grid;
-  place-items: center;
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   min-height: 100vh;
   background-color: var(--bg-primary);
   transition: var(--ease-in);
@@ -49,12 +51,22 @@ body {
 
 .wrapper {
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+
+
+}
+
+.todo-container {
+
   background-color: var(--bg-secondary);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   padding-block: 2em;
-  border: 2px solid var(--accent-clr);
-  border-radius: 20px;
-  padding-inline: 3em;
+  /* border: 1.2px solid var(--accent-clr); */
+  border-radius: 8px;
+  padding-inline: 2em;
   transition: var(--ease-in);
 
 }
@@ -66,7 +78,7 @@ body {
 
 }
 
-span:first-child {
+.headline > span:first-child {
 
   text-transform: uppercase;
   font-size: 2em;
@@ -75,10 +87,11 @@ span:first-child {
 
 }
 
-span:last-child {
+.headline > span:last-child {
 
   font-weight: 800;
   color: var(--text-clr);
+  font-size: 0.75rem;
 
 }
 
@@ -160,12 +173,13 @@ li span {
 
   width: 40px;
   height: 40px;
-  scale: 0.6;
+  font-size: 1rem;
+  padding-top: .55em;
   color: var(--text-clr);
   text-align: center;
   position: absolute;
   right: 0;
-  top: -10px;
+  top: -8px;
   transition: var(--ease-in);
 
 }
@@ -204,7 +218,7 @@ li span:hover {
 
 }
 
-.clr-btn-wrapper {
+.clr-btn-container {
 
   display: grid;
   place-items: center;
@@ -228,6 +242,44 @@ li span:hover {
   cursor: pointer;
   display: none;
 
+}
+
+.indicator-tab {
+
+  background-color: var(--bg-secondary);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  padding-block: 1em;
+  /* border: 1.5px solid var(--accent-clr); */
+  border-radius: 8px;
+  padding-inline: 2.3em;
+  transition: var(--ease-in);
+
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  text-transform: lowercase;
+  gap: 2em;
+  font-size: 1.3rem;
+  color: var(--indicator-text);
+  text-transform: capitalize;
+  font-weight: lighter;
+
+}
+
+.indicator-tab > *:hover {
+
+  color: var(--accent-clr);
+  cursor: pointer;
+  transition: var(--ease-in);
+  position: relative;
+
+}
+
+.indicator-tab__option.active {
+
+
+  color: var(--accent-clr);
+  
 }
 
 /* The switch - the box around the slider */
