@@ -1,6 +1,8 @@
 const input = document.querySelector('input[name=text]');
 const toggleTheme = document.querySelector('input[type=checkbox]');
 const listContainer = document.querySelector('.list-container');
+const indicatorTab = document.querySelector('.indicator-tab');
+const optionTab = document.querySelectorAll('.indicator-tab__option');
 const placeholder = document.querySelector('.text-display');
 const addValue = document.querySelector('.add-btn')
 const clearValue = document.querySelector('.clr-btn')
@@ -21,40 +23,41 @@ function addTodo (e) {
 
     } else if (input.value.length > 30) {
 
-      errorMsg.style.display = "block";
-      errorMsg.style.color = "red";
-      errorMsg.innerText = "Please enter a value less than 30 characters";
+        errorMsg.style.display = "block";
+        errorMsg.style.color = "red";
+        errorMsg.innerText = "Please enter a value less than 30 characters";
 
-      placeholder.style.display = "block";
+        placeholder.style.display = "block";
 
-      e.preventDefault()
+        e.preventDefault()
 
 
     } else {
 
-      clearValue.style.display = "block";
+        clearValue.style.display = "block";
+        indicatorTab.style.display = "flex";
 
-      let newItem = document.createElement("li");
-      newItem.innerText = input.value;
-      newItem.addEventListener('click', taskCompleted);
+        let newItem = document.createElement("li");
+        newItem.innerText = input.value;
+        newItem.classList.add('todo-item');
+        newItem.addEventListener('click', taskCompleted);
 
-      listContainer.appendChild(newItem);
-      
-      let span = document.createElement("span");
-      span.innerHTML = "&times;";
+        listContainer.appendChild(newItem);
+        
+        let span = document.createElement("span");
+        span.innerHTML = "&times;";
 
-      newItem.appendChild(span);
+        newItem.appendChild(span);
 
-      input.value = "";
-      errorMsg.style.display = "none";
-      placeholder.style.display = "none";
-      saveTasks();
+        input.value = "";
+        errorMsg.style.display = "none";
+        placeholder.style.display = "none";
+        saveTasks();
 
     }
 
     
   }
-
 
   function clearList () {
 
@@ -62,6 +65,8 @@ function addTodo (e) {
     input.value = "";
     clearValue.style.display = "none";
     placeholder.style.display = "block";
+    indicatorTab.style.display = "none";
+    localStorage.removeItem('tasks');
 
   }
 
@@ -91,6 +96,36 @@ function addTodo (e) {
       }
       return;
   })
+  
+
+  function setActive (element) {
+
+      optionTab.forEach(option => option.classList.remove('active'));
+      element.classList.add('active');
+
+      const todoItems = document.querySelectorAll('.todo-item');
+      const filter = element.querySelector('span').textContent.toLowerCase();
+      
+      todoItems.forEach(item => {
+      const isFinished = item.classList.contains('checked');
+      const isUnfinished = !isFinished;
+
+      if (filter === 'all') {
+        item.style.display = 'block';
+        
+      } else if (filter === 'finished' && isFinished) {
+        item.style.display = 'block';
+
+      } else if (filter === 'unfinished' && isUnfinished) {
+        item.style.display = 'block';
+
+      } else {
+        item.style.display = 'none';
+      }
+  });
+
+}
+
 
   function saveTasks () {
 
