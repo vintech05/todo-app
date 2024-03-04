@@ -11,36 +11,50 @@
 
 <body class="">
 
+
   <label class="switch">
     <input type="checkbox">
     <span class="slider"></span>
   </label>
 
   <div class="wrapper">
-    <div class="headline">
-      <span>todo</span>
-      <span>v1</span>
-    </div>
-    <div class="todo-input">
-      <div>
-        <input type="text" name="text" placeholder="Add task..." spellcheck="false">
+    <div class="todo-container">
+      <div class="headline">
+        <span>todo</span>
+        <span>this</span>
       </div>
-      <div>
-        <button class="add-btn">Add</button>
+      <div class="todo-input">
+        <div>
+          <input type="text" name="text" placeholder="Add task..." spellcheck="false" autocomplete="off">
+        </div>
+        <div>
+          <button class="add-btn">Add</button>
+        </div>
+      </div>
+      <div class="error-msg">
+        <p></p>
+      </div>
+      <div class="list-container">
+      </div>
+      <div class="text-display">
+        <p>
+          No tasks for today!
+        </p>
+      </div>
+      <div class="clr-btn-container">
+        <button class="clr-btn">clear</button>
       </div>
     </div>
-    <div class="error-msg">
-      <p></p>
-    </div>
-    <div class="list-container">
-    </div>
-    <div class="text-display">
-      <p>
-        No tasks for today!
-      </p>
-    </div>
-    <div class="clr-btn-wrapper">
-      <button class="clr-btn">clear</button>
+    <div class="indicator-tab">
+      <div onclick="setActive(this)" class="indicator-tab__option active">
+        <span class="filter-all">All</span>
+      </div>
+      <div onclick="setActive(this)" class="indicator-tab__option">
+        <span class="filter-finish">Finished</span>
+      </div>
+      <div onclick="setActive(this)" class="indicator-tab__option">
+        <span class="filter-unfinished">Unfinished</span>
+      </div>
     </div>
   </div>
   <script src="main.js"></script>
