@@ -16,11 +16,11 @@
   --primary-clr: #a8ce33;
   --input-clr: rgba(186, 182, 182, 0.2);
   --inner-input-clr: rgba(186, 182, 182, 0.008);
+  --accent-clr: #c7ef4d;
+  --secondary-clr: #d3ec85;
+  --text-clr: #101308;
   --indicator-text: rgba(85, 85, 85, 0.9);
   --primary-clr-hvr: #9fc332;
-  --secondary-clr: #d3ec85;
-  --accent-clr: #c7ef4d;
-  --text-clr: #101308;
   --ease-in: all ease-in 200ms;
 
 }
@@ -334,4 +334,30 @@ li span:hover {
 .switch input:checked + .slider:before {
   background-color: var(--primary-clr);
   transform: translateX(1.5em);
+}
+
+@media (prefers-color-scheme: dark) {
+  .body {
+  --bg-primary: #030401;
+  --primary-clr: #a6cd32; 
+  --input-clr: rgba(186, 182, 182, 0);
+  --inner-input-clr: rgba(186, 182, 182, 0);
+  --bg-secondary: #1d1f18;
+  --accent-clr: #8ab210;
+  --text-clr: #f5f7ed;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .body {
+  --bg-primary: #f5f8ed;
+  --bg-secondary: #fcfdfa;
+  --primary-clr: #a8ce33;
+  --input-clr: rgba(186, 182, 182, 0.2);
+  --inner-input-clr: rgba(186, 182, 182, 0.008);
+  --accent-clr: #c7ef4d;
+  --secondary-clr: #d3ec85;
+  --text-clr: #101308;
+  
+  }
 }
