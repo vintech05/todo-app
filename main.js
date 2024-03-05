@@ -122,13 +122,11 @@ function addTodo (e) {
       }
   });
 
-  optionTab.forEach(option => {
-    option.addEventListener('click', () => setActive(option));
-  });
-
-
 }
 
+optionTab.forEach(option => {
+  option.addEventListener('click', () => setActive(option));
+});
 
   function saveTasks () {
 
