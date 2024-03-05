@@ -16,9 +16,7 @@ function addTodo (e) {
         errorMsg.style.display = "block";
         errorMsg.style.color = "red";
         errorMsg.innerText = "Please enter a value";
-
-        placeholder.style.display = "block";
-
+        
         e.preventDefault()
 
     } else if (input.value.length > 30) {
@@ -122,6 +120,8 @@ function addTodo (e) {
       }
   });
 
+  
+
 }
 
 optionTab.forEach(option => {
@@ -133,20 +133,30 @@ optionTab.forEach(option => {
     localStorage.setItem('tasks', listContainer.innerHTML); 
     localStorage.setItem('theme', document.body.classList);
 
-
   }
 
   function loadTasks () {
 
-    listContainer.innerHTML = localStorage.getItem('tasks');
+    // console.log("loadTasks function called");
     document.body.classList = localStorage.getItem('theme');
 
-    if (listContainer.innerHTML !== "") {
+    const storedTasks = localStorage.getItem('tasks');
+
+    if (storedTasks) {
+
+      // console.log("Tasks are stored, hiding placeholder");
+      listContainer.innerHTML = storedTasks;
 
       placeholder.style.display = "none";
-      saveTasks();
+
+    } else {
+      
+      // console.log("No tasks are stored, showing placeholder");
+      listContainer.innerHTML = "";
+      placeholder.style.display = "block";
+
     }
-    return;
+    saveTasks();
   }
 
   loadTasks();
