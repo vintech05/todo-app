@@ -27,8 +27,6 @@ function addTodo (e) {
         errorMsg.style.color = "red";
         errorMsg.innerText = "Please enter a value less than 30 characters";
 
-        placeholder.style.display = "block";
-
         e.preventDefault()
 
 
